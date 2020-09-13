@@ -81,6 +81,15 @@ class GuideAndTravelAgencyUsersRegisterSerializer(serializers.ModelSerializer):
         return Users.objects.create_user(**validated_data)
 
 
+class EmailVerificationSerializers(serializers.ModelSerializer):
+    token = serializers.CharField(max_length=555)
+
+    class Meta:
+        model = Users
+        fields = ['token']
+
+
+
         
 
 

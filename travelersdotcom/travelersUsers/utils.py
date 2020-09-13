@@ -7,3 +7,11 @@ class Utils:
         body=data['email_body'],to=[data['to_email']])
 
         email.send()
+
+
+
+class UserDoesNotExistsException(Exception):
+    '''
+    Raise this if User doesnt exist!
+    '''
+    pass
