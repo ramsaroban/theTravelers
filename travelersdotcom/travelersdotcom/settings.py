@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'gq5fkk+8(tqexc2!)22kf%iec71o)xnh7g&!%i1gosk4ia*r+('
+SECRET_KEY = os.environ.get('SECRET_KEY')#'gq5fkk+8(tqexc2!)22kf%iec71o)xnh7g&!%i1gosk4ia*r+('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -88,15 +88,15 @@ WSGI_APPLICATION = 'travelersdotcom.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'travelersDB',
-        'USER': 'ram',
-        'PASSWORD': 'root@123',
-        'HOST': 'localhost',
+        'ENGINE': os.environ.get('DB_ENGINE'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
         'PORT': '',
         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES',default_storage_engine=INNODB",
-            'charset': 'utf8mb4',
+            'init_command': os.environ.get('DB_INIT_COMMAND'),#"SET sql_mode='STRICT_TRANS_TABLES',default_storage_engine=INNODB",
+            'charset': os.environ.get('DB_CHARSET'),
         },
     }
 }
@@ -170,8 +170,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST='smtp.gmail.com'
