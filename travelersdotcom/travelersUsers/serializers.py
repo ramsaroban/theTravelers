@@ -7,8 +7,8 @@ from django.utils.encoding import smart_bytes,smart_str, force_str, DjangoUnicod
 from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
 
 class TouristUsersRegisterSerializer(serializers.ModelSerializer):
-    password1 = serializers.CharField(max_length=15, min_length=7, write_only=True)
-    password2 = serializers.CharField(max_length=15, min_length=7, write_only=True)
+    password1 = serializers.CharField(max_length=30, min_length=7, write_only=True)
+    password2 = serializers.CharField(max_length=30, min_length=7, write_only=True)
 
     class Meta:
         model = Users
@@ -46,8 +46,8 @@ class TouristUsersRegisterSerializer(serializers.ModelSerializer):
 
 
 class GuideAndTravelAgencyUsersRegisterSerializer(serializers.ModelSerializer):
-    password1 = serializers.CharField(max_length=15, min_length=7, write_only=True)
-    password2 = serializers.CharField(max_length=15, min_length=7, write_only=True)
+    password1 = serializers.CharField(max_length=30, min_length=7, write_only=True)
+    password2 = serializers.CharField(max_length=30, min_length=7, write_only=True)
 
     class Meta:
         model = Users
@@ -96,7 +96,7 @@ class EmailVerificationSerializers(serializers.ModelSerializer):
 
 class LoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(max_length=255)
-    password = serializers.CharField(max_length=15, min_length=7, write_only=True)
+    password = serializers.CharField(max_length=30, min_length=7, write_only=True)
     first_name = serializers.CharField(max_length=255, read_only=True)
     tokens = serializers.CharField(max_length=555, read_only=True)
 
@@ -143,8 +143,8 @@ class ValidatePasswordResetTokenViewSerializer(serializers.ModelSerializer):
         fields = []
 
 class SetUpdatePasswordSerializer(serializers.ModelSerializer):
-    password1 = serializers.CharField(max_length=15, min_length=7, write_only=True) 
-    password2 = serializers.CharField(max_length=15, min_length=7, write_only=True) 
+    password1 = serializers.CharField(max_length=30, min_length=7, write_only=True) 
+    password2 = serializers.CharField(max_length=30, min_length=7, write_only=True) 
     uidb64 = serializers.CharField(max_length=15, write_only=True) 
     token = serializers.CharField(max_length=555, write_only=True) 
     
@@ -157,14 +157,13 @@ class SetUpdatePasswordSerializer(serializers.ModelSerializer):
             password2 = attrs.get('password2','')
             uidb64 = attrs.get('uidb64','')
             token = attrs.get('token','')
-
             if password1 != password2:
-                raise serializers.ValidationError('Password does not match.')
+                raise AuthenticationFailed('Password does not match.',401)
 
             id = force_str(urlsafe_base64_decode(uidb64))
             user = Users.objects.get(id=id)
             if not user:
-                raise serializers.ValidationError('Invalid token or uidb64.')
+                raise AuthenticationFailed('Invalid token or uidb64.',401)
             if not PasswordResetTokenGenerator().check_token(user,token):
                 raise AuthenticationFailed('Password reset link is invalid.',401)
 
@@ -172,6 +171,8 @@ class SetUpdatePasswordSerializer(serializers.ModelSerializer):
             user.save()
             return (user)
         except Exception as identifier:
-            raise AuthenticationFailed('Password reset link is invalid.',401)
+            #raise AuthenticationFailed('Password reset link is invalid.',401)
+            raise identifier
+
 
         return super().validate(attrs)

@@ -28,10 +28,12 @@ from drf_yasg import openapi
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import smart_bytes,smart_str, force_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
+from rest_framework.permissions import AllowAny
 
 class TouristUserRegisterView(generics.GenericAPIView):
     serializer_class = TouristUsersRegisterSerializer
     renderer_classes = [UserRenderer]
+    permission_classes = [AllowAny]
     def post(self, request):
         user = request.data
         serializer = self.serializer_class(data=user)
@@ -57,6 +59,7 @@ class TouristUserRegisterView(generics.GenericAPIView):
 class GuideAndTravelAgencyUserRegisterView(generics.GenericAPIView):
     serializer_class = GuideAndTravelAgencyUsersRegisterSerializer
     renderer_classes = [UserRenderer]
+    permission_classes = [AllowAny]
     def post(self, request):
         user = request.data
         serializer = self.serializer_class(data=user)
@@ -84,6 +87,7 @@ class GuideAndTravelAgencyUserRegisterView(generics.GenericAPIView):
 class VerifyEmail(views.APIView):
     serializer_class = EmailVerificationSerializers
     renderer_classes = [UserRenderer]
+    permission_classes = [AllowAny]
 
     token_param_config = openapi.Parameter('token',in_=openapi.IN_QUERY, descreption='email-verify', type=openapi.TYPE_STRING)
 
@@ -117,6 +121,7 @@ class VerifyEmail(views.APIView):
 class LoginAPIView(generics.GenericAPIView):
     serializer_class = LoginSerializer
     renderer_classes = [UserRenderer]
+    permission_classes = [AllowAny]
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -127,6 +132,7 @@ class LoginAPIView(generics.GenericAPIView):
 class RequestPasswordResetEmail(generics.GenericAPIView):
     serializer_class = ResetPasswordRequestEmailSerializer
     renderer_classes = [UserRenderer]
+    permission_classes = [AllowAny]
 
     def post(self,request):
         serializer = self.serializer_class(data = request.data)
@@ -155,6 +161,7 @@ class RequestPasswordResetEmail(generics.GenericAPIView):
 class ValidatePasswordResetTokenView(generics.GenericAPIView):
     serializer_class = ValidatePasswordResetTokenViewSerializer
     renderer_classes = [UserRenderer]
+    permission_classes = [AllowAny]
     def get(self, request, uidb64, token):
         try:
             id = smart_str(urlsafe_base64_decode(uidb64))
@@ -163,18 +170,19 @@ class ValidatePasswordResetTokenView(generics.GenericAPIView):
                 return Response({'error':'Invalid request.'}, status=status.HTTP_400_BAD_REQUEST)
             
             if not PasswordResetTokenGenerator().check_token(user=user,token=token):
-                return Response({'error':'Invalid Token. Please request new one.'})
+                return Response({'error':'Invalid Token. Please request new one.'}, status=status.HTTP_400_BAD_REQUEST)
             
-            return Response({'success':True, 'message':'Valid credentials.','uidb64':uidb64,'token':token})
+            return Response({'success':True, 'message':'Valid credentials.','uidb64':uidb64,'token':token},status=status.HTTP_200_OK)
 
         except DjangoUnicodeDecodeError as identifier:
-                return Response({'error':'Invalid Token. Please request new one.'})
+                return Response({'error':'Invalid Token. Please request new one.'}, status=status.HTTP_400_BAD_REQUEST)
         
 
 class SetUpdatePasswordAPIView(generics.GenericAPIView):
 
     serializer_class = SetUpdatePasswordSerializer
     renderer_classes = [UserRenderer]
+    permission_classes = [AllowAny]
 
     def patch(self, request):
         serializer = self.serializer_class(data=request.data)
