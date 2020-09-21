@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DATABASE_NAME = config('DATABASE_NAME')
+DATABASE_PASSWORD = config('DATABASE_PASSWORD')
 
 # Application definition
 
@@ -87,20 +90,20 @@ WSGI_APPLICATION = 'travelersdotcom.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'travelersDB',
-        'USER': 'ram',
-        'PASSWORD': 'root@123',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': DATABASE_NAME,
+        'USER': 'postgres',
+        'PASSWORD': DATABASE_PASSWORD,
         'HOST': 'localhost',
-        'PORT': '',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES',default_storage_engine=INNODB",
-            'charset': 'utf8mb4',
-        },
+        'PORT': '5432',
+        # 'OPTIONS': {
+        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES',default_storage_engine=INNODB",
+        #     'charset': 'utf8mb4',
+        # },
     }
 }
-   
 
+  
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -153,6 +156,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_USE_TLS = True
 EMAIL_HOST='smtp.gmail.com'
