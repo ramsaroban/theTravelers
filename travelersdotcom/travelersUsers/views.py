@@ -6,11 +6,10 @@ from .serializers import (
     TouristUsersRegisterSerializer,
     GuideAndTravelAgencyUsersRegisterSerializer,
     EmailVerificationSerializers,
-    TouristUserProfileSerializers,
 )
 
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import Users,TouristUserProfile
+from .models import Users
 from .utils import Utils, UserDoesNotExistsException
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
@@ -102,9 +101,3 @@ class VerifyEmail(views.APIView):
             return Response({'error':'%s'%e}, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-from rest_framework import viewsets
-class TouristUserProfileViewset(viewsets.ModelViewSet):
-    queryset = TouristUserProfile.objects.all()
-    serializer_class = TouristUserProfileSerializers
-    

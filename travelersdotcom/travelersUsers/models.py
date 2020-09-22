@@ -97,26 +97,3 @@ class Users(AbstractBaseUser, PermissionsMixin):
         return ''
 
 
-#Gender Choices 
-GENDER_CHOICES = (
-    ('Male','MALE'),
-    ('Female','FEMALE'),
-    ('Others','OTHERS')
-)
-# Model for User Account
-class TouristUserProfile(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, parent_link=True, on_delete=models.CASCADE, related_name='tourist_user_profile')
-    mobile_number   = PhoneField(blank=False, help_text="Contact Phone Number")
-    gender          = models.CharField(max_length=10,
-                                       choices=GENDER_CHOICES,
-                                       default=GENDER_CHOICES[0][0])
-    date_of_birth   = models.DateField()
-    nationality     = models.CharField(_('Nationality'), max_length=30, blank=False, null=False)
-    profile_pic     = models.ImageField(upload_to='profile/', blank=False, null=False)
-    passport_image  = models.ImageField(upload_to='passport/', blank=True, null=True)
-    visa_image      = models.ImageField(upload_to='visa/', blank=True, null=True)
-
-
-    def __str__(self):
-        return self.user.email 

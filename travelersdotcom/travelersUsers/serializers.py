@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Users,TouristUserProfile
+from .models import Users
 
 class TouristUsersRegisterSerializer(serializers.ModelSerializer):
     password1 = serializers.CharField(max_length=15, min_length=7, write_only=True)
@@ -87,12 +87,6 @@ class EmailVerificationSerializers(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = ['token']
-
-
-class TouristUserProfileSerializers(serializers.ModelSerializer):
-    class Meta:
-        model =  TouristUserProfile
-        fields = '__all__'
 
 
 
