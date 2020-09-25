@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')#'gq5fkk+8(tqexc2!)22kf%iec71o)xnh7g&!%i1gosk4ia*r+('
+SECRET_KEY = 'gq5fkk+8(tqexc2!)22kf%iec71o)xnh7g&!%i1gosk4ia*r+('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,21 +85,31 @@ WSGI_APPLICATION = 'travelersdotcom.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_ENGINE'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'tourDB',
+        'USER': 'thetravelers',
+        'PASSWORD': 'Saroban@395',
+        'HOST': 'localhost',
         'PORT': '',
-        'OPTIONS': {
-            'init_command': os.environ.get('DB_INIT_COMMAND'),#"SET sql_mode='STRICT_TRANS_TABLES',default_storage_engine=INNODB",
-            'charset': os.environ.get('DB_CHARSET'),
-        },
     }
 }
+   
+# DATABASES = {
+#     'default': {
+#         'ENGINE': os.environ.get('DB_ENGINE'),
+#         'NAME': os.environ.get('DB_NAME'),
+#         'USER': os.environ.get('DB_USER'),
+#         'PASSWORD': os.environ.get('DB_PASSWORD'),
+#         'HOST': os.environ.get('DB_HOST'),
+#         'PORT': '',
+#         'OPTIONS': {
+#             'init_command': os.environ.get('DB_INIT_COMMAND'),#"SET sql_mode='STRICT_TRANS_TABLES',default_storage_engine=INNODB",
+#             'charset': os.environ.get('DB_CHARSET'),
+#         },
+#     }
+# }
    
 
 # Password validation
@@ -182,5 +192,5 @@ MEDIA_URL = '/media/'
 EMAIL_USE_TLS = True
 EMAIL_HOST='smtp.gmail.com'
 EMIAL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = 'travelers.api@gmail.com'
+EMAIL_HOST_PASSWORD = '1325126040@Saroban'
