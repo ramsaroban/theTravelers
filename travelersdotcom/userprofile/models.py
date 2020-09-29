@@ -14,7 +14,7 @@ GENDER_CHOICES = (
 # Model for User Account
 class TouristUserProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, parent_link=True, on_delete=models.CASCADE, related_name='tourist_user_profile')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, parent_link=True, on_delete=models.CASCADE, related_name='tourist_user_profile')
     mobile_number   = PhoneField(blank=False, help_text="Contact Phone Number")
     gender          = models.CharField(max_length=10,
                                        choices=GENDER_CHOICES,
@@ -53,7 +53,7 @@ YES_NO_CHOICE = (
 
 class GuideUserProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, parent_link=True, on_delete=models.CASCADE, related_name='guide_user_profile')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, parent_link=True, on_delete=models.CASCADE, related_name='guide_user_profile')
 
     mobile_number   = PhoneField(blank=False, help_text="Contact Phone Number")
     gender          = models.CharField(max_length=10,
@@ -88,7 +88,7 @@ class GuideUserProfile(models.Model):
 
 class TravelAgencyProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, parent_link=True, on_delete=models.CASCADE, related_name='agency_user_profile')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, parent_link=True, on_delete=models.CASCADE, related_name='agency_user_profile')
     mobile_number   = PhoneField(blank=False, help_text="Contact Phone Number")
     website         = models.CharField(_('Website'), max_length=100, blank=False,null=True)
     address         = models.CharField(_('Address'), max_length=100, blank=False,null=True)
