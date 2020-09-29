@@ -11,5 +11,18 @@ router.register('touristprofile', TouristUserProfileViewset),
 router.register('guideprofile', GuideUserProfileViewset),
 router.register('agencyprofile', AgencyUserProfileViewset),
 
-urlpatterns = []
+urlpatterns = [
+path('touristprofile/', TouristUserProfileViewset.as_view({
+    'post': 'create'
+})),
+path('guideprofile/', GuideUserProfileViewset.as_view({
+    'post': 'create'
+})),
+
+path('agencyprofile/', AgencyUserProfileViewset.as_view({
+    'post': 'create'
+})),
+
+
+]
 urlpatterns += router.urls
