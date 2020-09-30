@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'travelersMedia',
     'travelersUsers',
+    'travelersProfiles'
 ]
 AUTH_USER_MODEL = "travelersUsers.Users" 
 MIDDLEWARE = [
