@@ -11,7 +11,7 @@ class ImageModel(models.Model):
         ('active','Active'),
         ('deactivated','Deactivated'),
     )
-    user            = models.ManyToManyField(Users, related_name='users_photo', blank=True)
+    user            = models.ForeignKey(Users, related_name='users_photo', blank=True, on_delete=models.CASCADE)
     title           = models.CharField(max_length=555)
     alt             = models.CharField(null=True, blank=True, max_length=255)
     image           = models.ImageField(upload_to=image_directory_path, default = 'images/static/defualt.png')

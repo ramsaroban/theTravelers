@@ -50,8 +50,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'travelersMedia',
     'travelersUsers',
-    'userprofile',
-    'travelersProfiles'
+    'travelersProfiles',
 
 ]
 AUTH_USER_MODEL = "travelersUsers.Users" 

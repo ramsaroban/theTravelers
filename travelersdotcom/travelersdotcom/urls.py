@@ -41,10 +41,11 @@ urlpatterns = [
     path('redoc', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
     path('api/travelers-users/', include('travelersUsers.urls')),
-    path('api/travelers-users/', include('userprofile.urls')),
+    
 
     path('api/auth/', include('travelersUsers.urls')),
     path('api/profiles/', include('travelersProfiles.urls')),
+    path('api/images/', include('travelersMedia.urls')),
 
     #path('media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
     #path('static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
