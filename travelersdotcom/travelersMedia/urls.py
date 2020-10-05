@@ -7,8 +7,10 @@ app_name = 'travelersMedia'
 
 
 router = routers.SimpleRouter()
-router.register('user', ImageModelView),
+# router.register('user', ImageModelView),\
 
 
-urlpatterns = []
+urlpatterns = [
+path('user/',ImageModelView.as_view(),name='user-image')
+]
 urlpatterns += router.urls
