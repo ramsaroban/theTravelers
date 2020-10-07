@@ -18,11 +18,12 @@ from rest_framework import generics, status
 Users = get_user_model()
 
 
+
 def modify_input_for_multiple_files(user_id,title,alt,image,status,):
     dict = {}
     dict['user'] = user_id
     dict['title'] = title
-    dict['alt'] = alt
+    dict['alt'] = str(image)
     dict['image'] = image
     dict['status'] = status
     return dict
@@ -31,15 +32,14 @@ class ImageListCreateView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request, *args, **kwargs):
-        queryset=ImageModel.objects.filter(user=2)
-        print(queryset)
+        queryset=ImageModel.objects.filter(user=request.user.id)
         serializer=ImageModelSerializer(queryset,many=True)
         return Response(serializer.data)
     
     def post(self, request, *args, **kwargs):
         user = request.data['user']
         images = dict((request.data).lists())['image']
-        alt=request.data['alt']
+        alt=None
         _status=request.data['status']
         title=request.data['title']
     
@@ -76,14 +76,6 @@ class ImageDetailView(APIView):
         image = self.get_object(pk)
         serializer = ImageModelSerializer(image)
         return Response(serializer.data)
-
-    def put(self, request, pk, format=None):
-        image = self.get_object(pk)
-        serializer = ImageModelSerializer(image, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
         image = self.get_object(pk)
