@@ -10,7 +10,7 @@ from core_utility import (
     police_verification_image_directory_path,
     agreement_image_directory_path,
 )
-from travelersMedia.models import ImageModel 
+#from travelersMedia.models import ImageModel 
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -94,7 +94,7 @@ class GuideUserProfile(models.Model):
     is_featured=models.BooleanField(_('Featured'),default=False)
     is_in_top_ten=models.BooleanField(_('Top Ten'),default=False)
     def __str__(self):
-        return self.user.email 
+        return self.mobile_number 
 
 
 class TravelAgencyProfile(models.Model):

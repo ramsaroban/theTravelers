@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'gq5fkk+8(tqexc2!)22kf%iec71o)xnh7g&!%i1gosk4ia*r+('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','thetravelers.com']
 
@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['127.0.0.1','thetravelers.com']
 # Application definition
 
 INSTALLED_APPS = [
-
+    'django.contrib.gis',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,9 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'travelersPlaces',
     'travelersMedia',
     'travelersUsers',
-    'travelersProfiles'
+    'travelersProfiles',
 ]
 AUTH_USER_MODEL = "travelersUsers.Users" 
 MIDDLEWARE = [
@@ -90,7 +91,8 @@ WSGI_APPLICATION = 'travelersdotcom.wsgi.application'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tourDB',
         'USER': 'thetravelers',
         'PASSWORD': 'Saroban@395',
