@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'travelersMedia',
     'travelersUsers',
     'travelersProfiles',
+    'travelersReviewsComments',
 ]
 AUTH_USER_MODEL = "travelersUsers.Users" 
 MIDDLEWARE = [
