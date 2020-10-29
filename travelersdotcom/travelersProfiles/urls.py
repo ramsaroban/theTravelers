@@ -21,7 +21,7 @@ app_name = 'travelersProfiles'
 router = routers.SimpleRouter()
 router.register('touristprofile', TouristProfileView),
 router.register('guideprofile', GuideUserProfileViewset),
-router.register('agencyprofile', AgencyUserProfileViewset),
+router.register('travelagencyprofile', AgencyUserProfileViewset),
 
 urlpatterns = []
 urlpatterns += router.urls

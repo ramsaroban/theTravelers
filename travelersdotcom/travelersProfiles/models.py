@@ -10,7 +10,7 @@ from core_utility import (
     police_verification_image_directory_path,
     agreement_image_directory_path,
 )
-from travelersMedia.models import ImageModel 
+#from travelersMedia.models import ImageModel 
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -63,7 +63,7 @@ YES_NO_CHOICE = (
 )
 
 class GuideUserProfile(models.Model):
-    user            = models.OneToOneField(Users, parent_link=True, on_delete=models.CASCADE)
+    user            = models.OneToOneField(Users,primary_key=True,on_delete=models.CASCADE)
     mobile_number   = models.CharField(_('Phone Number'),max_length=15, blank=False, help_text="Contact Phone Number")
     gender          = models.CharField(max_length=10,
                                        choices=GENDER_CHOICES,
@@ -94,11 +94,11 @@ class GuideUserProfile(models.Model):
     is_featured=models.BooleanField(_('Featured'),default=False)
     is_in_top_ten=models.BooleanField(_('Top Ten'),default=False)
     def __str__(self):
-        return self.user.email 
+        return self.mobile_number 
 
 
 class TravelAgencyProfile(models.Model):
-    user = models.OneToOneField(Users, parent_link=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(Users, primary_key=True, on_delete=models.CASCADE)
     owners_name     = models.CharField(_('Owner Name'), max_length=50, blank=False, null=False, help_text='Owners Name')
     mobile_number   = models.CharField(_('Phone Number'),max_length=15, blank=False, help_text="Contact Phone Number")
     website         = models.CharField(_('Website'), max_length=100, blank=False,null=True)

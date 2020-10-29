@@ -4,7 +4,7 @@ from .serializers import (
 )
 
 from .models import (
-    ImageModel,
+    PlaceImageModel,
   
 )
 from drf_yasg.utils import swagger_auto_schema
@@ -19,34 +19,37 @@ Users = get_user_model()
 
 
 
-def modify_input_for_multiple_files(user_id,title,alt,image,status,):
+def modify_input_for_multiple_files(user_id,place,title,alt,image,status):
     dict = {}
-    dict['user'] = user_id
+    dict['uploader'] = user_id
+    dict['place'] = place
     dict['title'] = title
     dict['alt'] = str(image)
     dict['image'] = image
-    dict['status'] = status
+    dict['status'] = 'active'
     return dict
 
 class ImageListCreateView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request, *args, **kwargs):
-        queryset=ImageModel.objects.filter(user=request.user.id)
+        queryset=PlaceImageModel.objects.filter(uploader=request.user.id)
         serializer=ImageModelSerializer(queryset,many=True)
         return Response(serializer.data)
     
     def post(self, request, *args, **kwargs):
         user = request.data['user']
+
         images = dict((request.data).lists())['image']
-        alt=None
-        _status=request.data['status']
+        alt=_status=None
         title=request.data['title']
+        place=request.data['place']
+
     
         flag = 1
         arr = []
         for img_name in images:
-            modified_data = modify_input_for_multiple_files(user,title,alt,img_name,_status)
+            modified_data = modify_input_for_multiple_files(user,place,title,alt,img_name,_status)
           
             file_serializer = ImageModelSerializer(data=modified_data)
             if file_serializer.is_valid():
@@ -68,8 +71,8 @@ class ImageDetailView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
     def get_object(self, pk):
         try:
-            return ImageModel.objects.get(pk=pk)
-        except ImageModel.DoesNotExist:
+            return PlaceImageModel.objects.get(pk=pk)
+        except PlaceImageModel.DoesNotExist:
             raise Http404
 
     def get(self, request, pk, format=None):

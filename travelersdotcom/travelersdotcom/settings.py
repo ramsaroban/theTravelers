@@ -33,13 +33,14 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+
 DATABASE_NAME = config('DATABASE_NAME')
 DATABASE_PASSWORD = config('DATABASE_PASSWORD')
 
 # Application definition
 
 INSTALLED_APPS = [
-
+    'django.contrib.gis',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,9 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'travelersPlaces',
     'travelersMedia',
     'travelersUsers',
     'travelersProfiles',
+
+    'travelersReviewsComments',
 
 ]
 AUTH_USER_MODEL = "travelersUsers.Users" 
@@ -98,7 +102,10 @@ WSGI_APPLICATION = 'travelersdotcom.wsgi.application'
 DATABASES = {
     'default': {
 
-        'ENGINE': 'django.db.backends.postgresql',
+
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': DATABASE_NAME,
         'USER': 'postgres',
         'PASSWORD': DATABASE_PASSWORD,
