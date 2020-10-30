@@ -30,6 +30,8 @@ def agreement_image_directory_path(instance, filename):
     return 'Images/partners/agreement/{0}'.format(filename)
 
 
+
 def places_images(instance, filename):
     # file will be uploaded to MEDIA_ROOT/artist_name/<filename>
     return 'Images/places/{0}'.format(filename)
+

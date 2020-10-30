@@ -14,6 +14,7 @@ class PlaceImageModel(models.Model):
         ('active','Active'),
         ('deactivated','Deactivated'),
     )
+
     uploader        = models.ForeignKey(Users, related_name='users_photo', blank=True, on_delete=models.CASCADE)
     place           = models.ForeignKey(TravelersVisitingPlaces, on_delete=models.CASCADE, related_name='place_images', blank=True, null=True)
     title           = models.CharField(max_length=555)

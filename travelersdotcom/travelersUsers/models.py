@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _ 
+import uuid
+from django.conf import settings
+from phone_field import PhoneField
 
 from django.contrib.auth.models import ( 
     AbstractBaseUser,
@@ -99,4 +102,4 @@ class Users(AbstractBaseUser, PermissionsMixin):
         }
         return data
 
-    
+

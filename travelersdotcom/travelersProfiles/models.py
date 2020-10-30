@@ -26,7 +26,7 @@ GENDER_CHOICES = (
 )
 #Visitors(Tourist Profiles)
 class TouristUserProfile(models.Model):
-    user            = models.OneToOneField(Users, primary_key=True, on_delete=models.CASCADE, related_name='tourist_user_profile')
+    user            = models.OneToOneField(Users, primary_key=True, on_delete=models.CASCADE)
     mobile_number   = models.CharField(_('Phone Number'),max_length=15, blank=False, help_text="Contact Phone Number")
     gender          = models.CharField(max_length=10,
                                        choices=GENDER_CHOICES,
@@ -63,7 +63,7 @@ YES_NO_CHOICE = (
 )
 
 class GuideUserProfile(models.Model):
-    user            = models.OneToOneField(Users, parent_link=True, on_delete=models.CASCADE, related_name='guide_user_profile')
+    user            = models.OneToOneField(Users,primary_key=True,on_delete=models.CASCADE)
     mobile_number   = models.CharField(_('Phone Number'),max_length=15, blank=False, help_text="Contact Phone Number")
     gender          = models.CharField(max_length=10,
                                        choices=GENDER_CHOICES,
@@ -98,7 +98,7 @@ class GuideUserProfile(models.Model):
 
 
 class TravelAgencyProfile(models.Model):
-    user = models.OneToOneField(Users, parent_link=True, on_delete=models.CASCADE, related_name='agency_user_profile')
+    user = models.OneToOneField(Users, primary_key=True, on_delete=models.CASCADE)
     owners_name     = models.CharField(_('Owner Name'), max_length=50, blank=False, null=False, help_text='Owners Name')
     mobile_number   = models.CharField(_('Phone Number'),max_length=15, blank=False, help_text="Contact Phone Number")
     website         = models.CharField(_('Website'), max_length=100, blank=False,null=True)

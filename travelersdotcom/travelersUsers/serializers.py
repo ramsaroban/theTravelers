@@ -100,6 +100,7 @@ class LoginSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(max_length=255, read_only=True)
     tokens = serializers.CharField(max_length=555, read_only=True)
 
+
     class Meta:
         model = Users
         fields = ['email','first_name','password','tokens']
