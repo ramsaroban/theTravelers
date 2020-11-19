@@ -33,7 +33,7 @@ class PlaceCategoryAdmin(admin.OSMGeoAdmin):
     search_field = ['category']
 
 class ActivitiesAtPlacesModelAdmin(admin.OSMGeoAdmin):
-    list_display = ['name','image','image']
+    list_display = ['name','image']
     search_filed = ['name']
 
 admin.site.register(TravelersUserLocation, TravelersUserLocationAdmin)

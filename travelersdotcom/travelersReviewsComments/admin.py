@@ -4,7 +4,7 @@ from .models import (
 )
 
 class TravelersVisitingPlaceReviewsCommentAdmin(admin.ModelAdmin):
-    list_display = ['user','place','rating','created_at','updated_at']
+    list_display = ['id','user','place','rating','created_at','updated_at']
     search_filed = ['user','place']
 
 

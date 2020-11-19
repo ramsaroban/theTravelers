@@ -1,13 +1,16 @@
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import Point
 from django.contrib.auth import get_user_model
+from django.core.serializers import serialize
 User = get_user_model()
 
 from django.utils.translation import ugettext_lazy as _
 
 from core_utility import places_images
-
-
+# from travelersReviewsComments.models import(
+#     TravelersVisitingPlaceReviewsComment,
+# )
+from django.db.models import Avg
 
 
 class TravelersUserLocation(models.Model):
@@ -89,6 +92,7 @@ class PlaceCategory(models.Model):
     def __str__(self):
         return '{}'.format(self.category)
 
+
 class TravelersVisitingPlaces(models.Model):
     local_area  = models.ForeignKey(AreasModel, on_delete=models.PROTECT, related_name='local_area_place')
     name        = models.CharField(_('Title'), max_length=255)
@@ -108,3 +112,30 @@ class TravelersVisitingPlaces(models.Model):
     @property
     def latitude(self):
         return self.location[1]
+    
+    @property
+    def reviews(self):
+        data = {}
+        reviews_count = self.place_reviews.filter(place = self.id).count()
+        rating_average = self.place_reviews.aggregate(Avg('rating')).get('rating__avg')
+        data['total_reviews'] = reviews_count
+        data['avg_rating'] =  rating_average
+        return data
+
+    @property
+    def locality(self):
+        area = AreasModel.objects.get(id=self.id)
+        data = {}
+        data['id'] = area.id
+        data['name'] = area.name
+        return data
+    
+    @property
+    def categories(self):
+        data = PlaceCategory.objects.filter(place_category=self.id).values_list('category')
+        return data
+    
+    @property
+    def activities(self):
+        data = ActivitiesAtPlacesModel.objects.filter(place_activity=self.id).values_list('name')
+        return data

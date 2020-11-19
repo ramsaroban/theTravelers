@@ -11,10 +11,6 @@ from .views import (
     SetUpdatePasswordAPIView,
     )
 
-
-
-
-
 urlpatterns = [
     path('user/register', TouristUserRegisterView.as_view(), name='user-register'),
     path('partners/register', GuideAndTravelAgencyUserRegisterView.as_view(), name='partners-register'),
@@ -25,4 +21,3 @@ urlpatterns = [
     path('reset-password/<uidb64>/<token>', ValidatePasswordResetTokenView.as_view(), name='reset-password-confirm'),
     path('reset-password-complete', SetUpdatePasswordAPIView.as_view(), name='reset-password-complete'),
 ]
-

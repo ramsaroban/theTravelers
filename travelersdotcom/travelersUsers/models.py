@@ -1,8 +1,5 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _ 
-import uuid
-from django.conf import settings
-from phone_field import PhoneField
 
 from django.contrib.auth.models import ( 
     AbstractBaseUser,
@@ -73,7 +70,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
         TRAVEL_AGENCY = 'Travel Agency', 'TRAVEL AGENCY'
     
     user_type       = models.CharField(_('User Type'), max_length=50, choices=Types.choices, default=Types.TOURIST)
-    email      = models.EmailField(_('Email Address'), max_length=255, unique=True, db_index=True)
+    email           = models.EmailField(_('Email Address'), max_length=255, unique=True, db_index=True)
     first_name      = models.CharField(_('first name'), max_length =30,blank=False,null=False)
     middle_name     = models.CharField(_('middle name'), max_length=30,blank=True, null=True, default='')
     last_name       = models.CharField(_('last name'), max_length=30,blank=False, null=False)
@@ -102,4 +99,4 @@ class Users(AbstractBaseUser, PermissionsMixin):
         }
         return data
 
-
+    

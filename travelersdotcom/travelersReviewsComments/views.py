@@ -23,9 +23,6 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework import permissions
 
-
-
-
 class LocationReviewRatingCreate(CreateAPIView):
 	permission_classes = [IsAuthenticatedOrReadOnly]
 	serializer_class=TravelersVisitingPlaceReviewsCommentSerializers
@@ -37,11 +34,12 @@ class LocationReviewRatingCreate(CreateAPIView):
 			headers = self.get_success_headers(serializer.data)
 			return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 		else:
-			return Response({'detail':'Not allowded to make others review.'})
+			return Response({'error':'Not Allowed to Create'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 
 class LocationReviewRatingUpdate(UpdateAPIView):
+	queryset = TravelersVisitingPlaceReviewsComment.objects.all()
 	permission_classes = [IsAuthenticatedOrReadOnly]
 	serializer_class=TravelersVisitingPlaceReviewsCommentUpdateSerializers
 	http_method_names = ['put']
@@ -60,7 +58,5 @@ class LocationReviewRatingUpdate(UpdateAPIView):
 
 			return Response(serializer.data)
 		else:
-			return Response({'detail':'Not allowded to update others review.'})
+			return Response({'error':'Not allowded to Update'}, status=status.HTTP_400_BAD_REQUEST)
 
-	
-	

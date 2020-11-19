@@ -10,7 +10,3 @@ class ImageModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlaceImageModel
         fields = ['uploader','place','title','alt','image','status',]
-
-        
- 
-

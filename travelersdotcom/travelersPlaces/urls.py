@@ -23,4 +23,6 @@ router.register('visitingplace', TravelersVisitingPlacesView),
 
 urlpatterns = []
 
+
 urlpatterns += router.urls
+

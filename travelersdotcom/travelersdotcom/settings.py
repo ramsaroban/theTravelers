@@ -12,9 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
 from datetime import timedelta
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,13 +27,8 @@ SECRET_KEY = 'gq5fkk+8(tqexc2!)22kf%iec71o)xnh7g&!%i1gosk4ia*r+('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = ['127.0.0.1','thetravelers.com']
 
-ALLOWED_HOSTS = ['*']
-
-
-
-DATABASE_NAME = config('DATABASE_NAME')
-DATABASE_PASSWORD = config('DATABASE_PASSWORD')
 
 # Application definition
 
@@ -53,9 +46,7 @@ INSTALLED_APPS = [
     'travelersMedia',
     'travelersUsers',
     'travelersProfiles',
-
     'travelersReviewsComments',
-
 ]
 AUTH_USER_MODEL = "travelersUsers.Users" 
 MIDDLEWARE = [
@@ -101,23 +92,15 @@ WSGI_APPLICATION = 'travelersdotcom.wsgi.application'
 # }
 DATABASES = {
     'default': {
-
-
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': DATABASE_NAME,
+        
+        'NAME': 'travel',
         'USER': 'postgres',
-        'PASSWORD': DATABASE_PASSWORD,
+        'PASSWORD': 12345,
         'HOST': 'localhost',
         'PORT': '5432',
-        # 'OPTIONS': {
-        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES',default_storage_engine=INNODB",
-        #     'charset': 'utf8mb4',
-        # },
     }
 }
-
    
 # DATABASES = {
 #     'default': {
@@ -135,8 +118,6 @@ DATABASES = {
 # }
    
 
-
-  
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -211,18 +192,11 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
 
 EMAIL_USE_TLS = True
 EMAIL_HOST='smtp.gmail.com'
 EMIAL_PORT = 587
-
-# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-
 EMAIL_HOST_USER = 'travelers.api@gmail.com'
 EMAIL_HOST_PASSWORD = '1325126040@Saroban'
-

@@ -11,7 +11,7 @@ router = routers.SimpleRouter()
 
 
 urlpatterns = [
-path('user/',ImageListCreateView.as_view(),name='user-image'),
+path('user/',ImageListCreateView.as_view(),name='user-image-all'),
 path('user/<int:pk>/',ImageDetailView.as_view(),name='user-image')
 ]
 urlpatterns += router.urls

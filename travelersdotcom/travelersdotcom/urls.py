@@ -39,16 +39,19 @@ urlpatterns = [
     path('swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-
-    path('api/travelers-users/', include('travelersUsers.urls')),
-    
-
     path('api/auth/', include('travelersUsers.urls')),
     path('api/profiles/', include('travelersProfiles.urls')),
     path('api/images/', include('travelersMedia.urls')),
     path('api/reviews/', include('travelersReviewsComments.urls')),
+
     path('api/traveler/places/', include('travelersPlaces.urls')),
+
+
+    
 
     #path('media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
     #path('static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 ]
+ 
+
+ # get by user id, get by place id
