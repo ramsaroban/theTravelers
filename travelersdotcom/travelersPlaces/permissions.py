@@ -11,7 +11,7 @@ class PlacePermission(BasePermission):
             return False
         else:
         	user=get_object_or_404(Users,id=request.user.id)
-        	if request.method in SAFE_METHODS and (user.is_staff or user.is_superuser or user.is_admin):
+        	if request.method in SAFE_METHODS:
         		return True
         	else:
         		if user.is_staff or user.is_superuser or user.is_admin:

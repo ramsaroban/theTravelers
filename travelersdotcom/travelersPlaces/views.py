@@ -18,33 +18,33 @@ from .permissions import PlacePermission
 class CountryView(viewsets.ModelViewSet):
     queryset = CountryModel.objects.all()
     serializer_class = CountryModelSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly,PlacePermission]
     http_method_names = ['get', 'post','put','delete']
 
 
 class AreasView(viewsets.ModelViewSet):
     queryset = AreasModel.objects.all()
     serializer_class = AreasModelSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly,PlacePermission]
     http_method_names = ['get', 'post','put','delete']
 
 
 class ActivitiesAtPlacesView(viewsets.ModelViewSet):
     queryset = ActivitiesAtPlacesModel.objects.all()
     serializer_class = ActivitiesAtPlacesModelSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly,PlacePermission]
     http_method_names = ['get', 'post','put','delete']
 
 
 class PlaceCategoryView(viewsets.ModelViewSet):
     queryset = PlaceCategory.objects.all()
     serializer_class = PlaceCategorySerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly,PlacePermission]
     http_method_names = ['get', 'post','put','delete']
 
 
 class TravelersVisitingPlacesView(viewsets.ModelViewSet):
     queryset = TravelersVisitingPlaces.objects.all()
     serializer_class = TravelersVisitingPlacesSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly,PlacePermission]
     http_method_names = ['get', 'post','put','delete']
