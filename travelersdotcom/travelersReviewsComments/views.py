@@ -68,12 +68,8 @@ class GetLocationReviewRatingByPlace(ListAPIView):
 	http_method_names = ['get']
 
 	def list(self, request, *args, **kwargs):
-		try:
-			place_id=request.data['place']
-		except:
-			return Response({'detail':'Place id is required.'})
-
-		queryset = TravelersVisitingPlaceReviewsComment.objects.filter(place=place_id)
+		
+		queryset = TravelersVisitingPlaceReviewsComment.objects.filter(place=self.kwargs['id'])
 
 		page = self.paginate_queryset(queryset)
 		if page is not None:
@@ -90,12 +86,7 @@ class GetLocationReviewRatingByUser(ListAPIView):
 	http_method_names = ['get']
 
 	def list(self, request, *args, **kwargs):
-		try:
-			user_id=request.data['user']
-		except:
-			return Response({'detail':'User id is required.'})
-
-		queryset = TravelersVisitingPlaceReviewsComment.objects.filter(user=user_id)
+		queryset = TravelersVisitingPlaceReviewsComment.objects.filter(user=self.kwargs['id'])
 
 		page = self.paginate_queryset(queryset)
 		if page is not None:

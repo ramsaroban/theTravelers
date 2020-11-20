@@ -33,7 +33,7 @@ class PlaceCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
         ordering = ['-id']  
 
-class TravelersVisitingPlacesSerializer(serializers.ModelSerializer):
+class TravelersVisitingPlacesSerializer(serializers.HyperlinkedModelSerializer):
     #local_area=AreasModelSerializer(read_only=True)
     #category=PlaceCategorySerializer(many=True,read_only=True)
     #activites=ActivitiesAtPlacesModelSerializer(many=True,read_only=True)
