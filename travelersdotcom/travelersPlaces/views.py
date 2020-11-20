@@ -8,6 +8,7 @@ from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import BasePermission,SAFE_METHODS
+from rest_framework.generics import ListAPIView
 
 Users = get_user_model()
 from django.shortcuts import get_object_or_404
@@ -48,3 +49,38 @@ class TravelersVisitingPlacesView(viewsets.ModelViewSet):
     serializer_class = TravelersVisitingPlacesSerializer
     permission_classes = [IsAuthenticatedOrReadOnly,PlacePermission]
     http_method_names = ['get', 'post','put','delete']
+
+
+class GetVisitingPlaceByCategory(ListAPIView):
+    queryset = TravelersVisitingPlaces.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class=TravelersVisitingPlacesSerializer
+    http_method_names = ['get']
+
+    def list(self, request, *args, **kwargs):
+        queryset = TravelersVisitingPlaces.objects.filter(category=self.kwargs['id'])
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+class GetVisitingPlaceByActivity(ListAPIView):
+    queryset = TravelersVisitingPlaces.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class=TravelersVisitingPlacesSerializer
+    http_method_names = ['get']
+
+    def list(self, request, *args, **kwargs):
+        queryset = TravelersVisitingPlaces.objects.filter(activites=self.kwargs['id'])
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
