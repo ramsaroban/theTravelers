@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .serializers import (
     TravelersVisitingPlaceReviewsCommentSerializers,
-    TravelersVisitingPlaceReviewsCommentUpdateSerializers
+    TravelersVisitingPlaceReviewsCommentUpdateSerializers,
+    GetLocationReviewRatingByPlaceSerializer
 )
 
 from .models import (
@@ -17,7 +18,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics, status
 Users = get_user_model()
-from rest_framework.generics import CreateAPIView,UpdateAPIView
+from rest_framework.generics import CreateAPIView,UpdateAPIView,ListAPIView
 
 from django.shortcuts import get_object_or_404
 
@@ -59,4 +60,51 @@ class LocationReviewRatingUpdate(UpdateAPIView):
 			return Response(serializer.data)
 		else:
 			return Response({'error':'Not allowded to Update'}, status=status.HTTP_400_BAD_REQUEST)
+
+class GetLocationReviewRatingByPlace(ListAPIView):
+	queryset = TravelersVisitingPlaceReviewsComment.objects.all()
+	permission_classes = [IsAuthenticatedOrReadOnly]
+	serializer_class=GetLocationReviewRatingByPlaceSerializer
+	http_method_names = ['get']
+
+	def list(self, request, *args, **kwargs):
+		try:
+			place_id=request.data['place']
+		except:
+			return Response({'detail':'Place id is required.'})
+
+		queryset = TravelersVisitingPlaceReviewsComment.objects.filter(place=place_id)
+
+		page = self.paginate_queryset(queryset)
+		if page is not None:
+		    serializer = self.get_serializer(page, many=True)
+		    return self.get_paginated_response(serializer.data)
+
+		serializer = self.get_serializer(queryset, many=True)
+		return Response(serializer.data)
+
+class GetLocationReviewRatingByUser(ListAPIView):
+	queryset = TravelersVisitingPlaceReviewsComment.objects.all()
+	permission_classes = [IsAuthenticatedOrReadOnly]
+	serializer_class=GetLocationReviewRatingByPlaceSerializer
+	http_method_names = ['get']
+
+	def list(self, request, *args, **kwargs):
+		try:
+			user_id=request.data['user']
+		except:
+			return Response({'detail':'User id is required.'})
+
+		queryset = TravelersVisitingPlaceReviewsComment.objects.filter(user=user_id)
+
+		page = self.paginate_queryset(queryset)
+		if page is not None:
+		    serializer = self.get_serializer(page, many=True)
+		    return self.get_paginated_response(serializer.data)
+
+		serializer = self.get_serializer(queryset, many=True)
+		return Response(serializer.data)
+	
+
+																																																																																						
 

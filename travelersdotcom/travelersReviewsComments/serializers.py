@@ -34,3 +34,10 @@ class TravelersVisitingPlaceReviewsCommentUpdateSerializers(serializers.ModelSer
 	class Meta:
 		model = TravelersVisitingPlaceReviewsComment
 		fields = ['user','place','reviews','rating','average_rating_place',]
+
+
+class GetLocationReviewRatingByPlaceSerializer(serializers.ModelSerializer):
+	average_rating_place=serializers.ReadOnlyField()
+	class Meta:
+		model=TravelersVisitingPlaceReviewsComment
+		fields = ['user','place','reviews','rating','average_rating_place',]
