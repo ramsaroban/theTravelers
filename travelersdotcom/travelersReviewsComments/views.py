@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .serializers import (
     TravelersVisitingPlaceReviewsCommentSerializers,
-    TravelersVisitingPlaceReviewsCommentUpdateSerializers
+    TravelersVisitingPlaceReviewsCommentUpdateSerializers,
+	GetVisitingPlaceReviewRatingByPlaceSerializer,
 )
 
 from .models import (
@@ -17,16 +18,17 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics, status
 Users = get_user_model()
-from rest_framework.generics import CreateAPIView,UpdateAPIView
+from rest_framework.generics import CreateAPIView,UpdateAPIView,ListAPIView
 
 from django.shortcuts import get_object_or_404
 
 from rest_framework import permissions
 
-class LocationReviewRatingCreate(CreateAPIView):
+class VisitingPlaceReviewRatingCreate(CreateAPIView):
 	permission_classes = [IsAuthenticatedOrReadOnly]
 	serializer_class=TravelersVisitingPlaceReviewsCommentSerializers
 	def create(self, request, *args, **kwargs):
+		print(request.data)
 		if int(request.user.id) == int(request.data['user']):
 			serializer = self.get_serializer(data=request.data)
 			serializer.is_valid(raise_exception=True)
@@ -38,7 +40,7 @@ class LocationReviewRatingCreate(CreateAPIView):
 
 
 
-class LocationReviewRatingUpdate(UpdateAPIView):
+class VisitingPlaceReviewRatingUpdate(UpdateAPIView):
 	queryset = TravelersVisitingPlaceReviewsComment.objects.all()
 	permission_classes = [IsAuthenticatedOrReadOnly]
 	serializer_class=TravelersVisitingPlaceReviewsCommentUpdateSerializers
@@ -60,3 +62,38 @@ class LocationReviewRatingUpdate(UpdateAPIView):
 		else:
 			return Response({'error':'Not allowded to Update'}, status=status.HTTP_400_BAD_REQUEST)
 
+class GetVisitingPlaceReviewRatingByPlace(ListAPIView):
+	queryset = TravelersVisitingPlaceReviewsComment.objects.all()
+	permission_classes = [IsAuthenticatedOrReadOnly]
+	serializer_class=GetVisitingPlaceReviewRatingByPlaceSerializer
+	http_method_names = ['get']
+
+	def list(self, request, *args, **kwargs):
+		
+		queryset = TravelersVisitingPlaceReviewsComment.objects.filter(place=self.kwargs['id'])
+
+		page = self.paginate_queryset(queryset)
+		if page is not None:
+		    serializer = self.get_serializer(page, many=True)
+		    return self.get_paginated_response(serializer.data)
+
+		serializer = self.get_serializer(queryset, many=True)
+		return Response(serializer.data)
+
+class GetVisitingPlaceReviewRatingByUser(ListAPIView):
+	queryset = TravelersVisitingPlaceReviewsComment.objects.all()
+	permission_classes = [IsAuthenticatedOrReadOnly]
+	serializer_class=GetVisitingPlaceReviewRatingByPlaceSerializer
+	http_method_names = ['get']
+
+	def list(self, request, *args, **kwargs):
+		queryset = TravelersVisitingPlaceReviewsComment.objects.filter(user=self.kwargs['id'])
+
+		page = self.paginate_queryset(queryset)
+		if page is not None:
+		    serializer = self.get_serializer(page, many=True)
+		    return self.get_paginated_response(serializer.data)
+
+		serializer = self.get_serializer(queryset, many=True)
+		return Response(serializer.data)
+	

@@ -33,13 +33,16 @@ class PlaceCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
         ordering = ['-id']  
 
-class TravelersVisitingPlacesSerializer(serializers.ModelSerializer):
+class TravelersVisitingPlacesSerializer(serializers.HyperlinkedModelSerializer):
     #local_area=AreasModelSerializer(read_only=True)
     #category=PlaceCategorySerializer(many=True,read_only=True)
     #activites=ActivitiesAtPlacesModelSerializer(many=True,read_only=True)
-
+    traveller_review_comment_by_place_url = serializers.HyperlinkedIdentityField(
+        view_name='travelersReviewComment:get-review-rating-by-place',
+        lookup_field='id'
+    )
+    
     class Meta:
         model = TravelersVisitingPlaces
-        fields = ['id','name','about','image','longitude','latitude','locality','categories','activities','reviews']
+        fields = ['id','name','about','image','longitude','latitude','locality','categories','activities','reviews','traveller_review_comment_by_place_url']
         ordering = ['-id']
-    

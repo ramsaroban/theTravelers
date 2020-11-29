@@ -8,13 +8,16 @@ from django.shortcuts import get_object_or_404
 class PlacePermission(BasePermission):
     def has_permission(self, request, view):
         if not request.user.is_authenticated:
-            return False
+            if request.method in SAFE_METHODS:
+                return True
+            else:
+                return False
         else:
-        	user=get_object_or_404(Users,id=request.user.id)
-        	if request.method in SAFE_METHODS and (user.is_staff or user.is_superuser or user.is_admin):
-        		return True
-        	else:
-        		if user.is_staff or user.is_superuser or user.is_admin:
-        			return True
-        		else:
-        			return False
+            user=get_object_or_404(Users,id=request.user.id)
+            if request.method in SAFE_METHODS:
+            	return True
+            else:
+            	if user.is_staff or user.is_superuser or user.is_admin:
+            		return True
+            	else:
+            		return False

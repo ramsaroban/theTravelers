@@ -17,7 +17,7 @@ class TravelersUserLocationAdmin(admin.OSMGeoAdmin):
     search_field = ['user']
 
 class TravelersVisitingPlacesAdmin(admin.OSMGeoAdmin):
-    list_display = ['name','latitude','longitude','image']
+    list_display = ['id','name','latitude','longitude','image']
     search_field = ['name']
 
 class CountryModelAdmin(admin.OSMGeoAdmin):
@@ -33,7 +33,7 @@ class PlaceCategoryAdmin(admin.OSMGeoAdmin):
     search_field = ['category']
 
 class ActivitiesAtPlacesModelAdmin(admin.OSMGeoAdmin):
-    list_display = ['name','image']
+    list_display = ['id','name','image']
     search_filed = ['name']
 
 admin.site.register(TravelersUserLocation, TravelersUserLocationAdmin)
