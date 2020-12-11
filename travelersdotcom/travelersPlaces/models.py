@@ -121,9 +121,10 @@ class TravelersVisitingPlaces(models.Model):
         data['total_reviews'] = reviews_count
         data['avg_rating'] =  rating_average
         return data
-    @property
+    #@property
     # def reviews_all(self):
     #     data = self.place_reviews
+
     @property
     def locality(self):
         area = AreasModel.objects.get(id=self.id)
@@ -132,6 +133,7 @@ class TravelersVisitingPlaces(models.Model):
         data['name'] = area.name
         return data
     
+
     @property
     def categories(self):
         data = PlaceCategory.objects.filter(place_category=self.id).values_list('category')
