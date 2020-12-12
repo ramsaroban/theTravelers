@@ -14,6 +14,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 from rest_framework import generics, status
 Users = get_user_model()
 
@@ -84,3 +85,39 @@ class ImageDetailView(APIView):
         image = self.get_object(pk)
         image.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# class GetVisitingPlaceAllPhotos(ListAPIView):
+#     queryset = PlaceImageModel.objects.all()
+#     permission_classes = [IsAuthenticatedOrReadOnly]
+#     serializer_class=ImageModelSerializer
+#     http_method_names = ['get']
+
+#     def list(self, request, *args, **kwargs):
+#         queryset = PlaceImageModel.objects.filter(place=self.kwargs['id'])
+
+#         page = self.paginate_queryset(queryset)
+#         if page is not None:
+#             serializer = self.get_serializer(page, many=True)
+#             return self.get_paginated_response(serializer.data)
+
+#         serializer = self.get_serializer(queryset, many=True)
+#         return Response(serializer.data)
+
+
+# class GetAllPhotosByUser(ListAPIView):
+#     queryset = PlaceImageModel.objects.all()
+#     permission_classes = [IsAuthenticatedOrReadOnly]
+#     serializer_class=ImageModelSerializer
+#     http_method_names = ['get']
+
+#     def list(self, request, *args, **kwargs):
+#         queryset = PlaceImageModel.objects.filter(uploader=self.kwargs['id'])
+
+#         page = self.paginate_queryset(queryset)
+#         if page is not None:
+#             serializer = self.get_serializer(page, many=True)
+#             return self.get_paginated_response(serializer.data)
+
+#         serializer = self.get_serializer(queryset, many=True)
+#         return Response(serializer.data)
