@@ -94,10 +94,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'traveler',
+        'NAME': 'travv',
         'USER': 'postgres',
         'PASSWORD': '12345',
-        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': 'localhost',
         'PORT': '',
     }
