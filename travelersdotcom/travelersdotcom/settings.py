@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['127.0.0.1','thetravelers.com','localhost']
 # Application definition
 
 INSTALLED_APPS = [
-
+    'django.contrib.gis',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'travelersPlaces',
     'travelersMedia',
     'travelersUsers',
-    'travelersProfiles'
+    'travelersProfiles',
+    'travelersReviewsComments',
 ]
 AUTH_USER_MODEL = "travelersUsers.Users" 
 MIDDLEWARE = [
@@ -90,10 +92,12 @@ WSGI_APPLICATION = 'travelersdotcom.wsgi.application'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'traveler',
         'USER': 'postgres',
         'PASSWORD': '12345',
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': 'localhost',
         'PORT': '',
     }

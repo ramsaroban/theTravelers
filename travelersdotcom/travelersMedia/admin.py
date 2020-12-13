@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import ImageModel
+from .models import (
+    PlaceImageModel
+)
 
-admin.site.register(ImageModel)
+admin.site.register(PlaceImageModel)
 
 # Register your models here.
