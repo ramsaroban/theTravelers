@@ -27,7 +27,7 @@ SECRET_KEY = 'gq5fkk+8(tqexc2!)22kf%iec71o)xnh7g&!%i1gosk4ia*r+('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','thetravelers.com']
+ALLOWED_HOSTS = ['127.0.0.1','thetravelers.com','localhost']
 
 
 # Application definition
@@ -93,10 +93,10 @@ WSGI_APPLICATION = 'travelersdotcom.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'tourDB',
-        'USER': 'thetravelers',
-        'PASSWORD': 'Saroban@395',
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'travv',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
         'HOST': 'localhost',
         'PORT': '',
     }
