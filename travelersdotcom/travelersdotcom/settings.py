@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 import os
 from datetime import timedelta
 
@@ -25,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'gq5fkk+8(tqexc2!)22kf%iec71o)xnh7g&!%i1gosk4ia*r+('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['127.0.0.1','thetravelers.com','localhost']
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'travelersUsers',
     'travelersProfiles',
     'travelersReviewsComments',
+    'guideAgencyReviewsComment',
 ]
 AUTH_USER_MODEL = "travelersUsers.Users" 
 MIDDLEWARE = [
@@ -94,11 +96,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'travv',
+        'NAME': config('DATABASE_NAME'),
         'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
-        'PORT': '',
+        'PASSWORD':config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST'),
+        'PORT': config('DATABASE_PORT'),
     }
 }
    

@@ -67,6 +67,7 @@ class GetVisitingPlaceReviewRatingByPlace(ListAPIView):
 	permission_classes = [IsAuthenticatedOrReadOnly]
 	serializer_class=GetVisitingPlaceReviewRatingByPlaceSerializer
 	http_method_names = ['get']
+	
 
 	def list(self, request, *args, **kwargs):
 		
