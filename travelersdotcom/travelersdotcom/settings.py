@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'travelersUsers',
     'travelersProfiles',
     'travelersReviewsComments',
-    'guideAgencyReviewsComment',
+
 ]
 AUTH_USER_MODEL = "travelersUsers.Users" 
 MIDDLEWARE = [
