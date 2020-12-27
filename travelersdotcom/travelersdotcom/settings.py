@@ -42,10 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    'travelersPlaces',
-    'travelersMedia',
     'travelersUsers',
     'travelersProfiles',
+    'travelersPlaces',
+    'travelersMedia',
     'travelersReviewsComments',
 ]
 AUTH_USER_MODEL = "travelersUsers.Users" 
@@ -94,9 +94,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'travv',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
+        'NAME': 'thetravelersDB',
+        'USER': 'thetravelers',
+        'PASSWORD': 'Saroban@395',
         'HOST': 'localhost',
         'PORT': '',
     }

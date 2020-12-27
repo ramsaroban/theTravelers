@@ -130,6 +130,8 @@ dmypy.json
 *migrations/*.py
 migrations/
 
+**/__pycache__/**
+
 **/migrations/**
 !**/migrations
 !**/migrations/__init__.py

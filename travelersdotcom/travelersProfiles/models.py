@@ -89,10 +89,11 @@ class GuideUserProfile(models.Model):
     agreement               = models.ImageField(_('Agreement'), upload_to=agreement_image_directory_path,
                                                             blank=True, null=True)
     interview_status        = models.CharField(_('Interview Complete?'), max_length=30, choices=YES_NO_CHOICE,default=YES_NO_CHOICE[0][0])
-    rating=models.IntegerField(_('Guide Standard Rating'),blank=True,null=True)
-    status=models.BooleanField(_('Availability'),default=True)
-    is_featured=models.BooleanField(_('Featured'),default=False)
-    is_in_top_ten=models.BooleanField(_('Top Ten'),default=False)
+    rating                  = models.IntegerField(_('Guide Standard Rating'),blank=True,null=True)
+    status                  = models.BooleanField(_('Availability'),default=True)
+    is_featured             = models.BooleanField(_('Featured'),default=False)
+    is_in_top_ten           = models.BooleanField(_('Top Ten'),default=False)
+
     def __str__(self):
         return self.mobile_number 
 
@@ -117,15 +118,3 @@ class TravelAgencyProfile(models.Model):
 
     def __str__(self):
         return self.user.email 
-
-
-class GuideAgencyReview(models.Model):
-    user        = models.ForeignKey(Users, on_delete=models.PROTECT, related_name='guide_agency_review')
-    reviewer    = models.ForeignKey(Users, on_delete=models.PROTECT, related_name='guide_agency_reviewer')
-    reviews     = models.TextField(_('Reviews'), max_length=1111, blank=True, null=True)
-    rating      = models.FloatField(_('Rating'), max_length=5.0, default=1.0, blank=False, null=False)
-    created_at  = models.DateTimeField(auto_now_add=True)
-    updated_at  = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return '{}'.format(self.place.name)

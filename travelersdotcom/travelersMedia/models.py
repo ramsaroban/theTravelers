@@ -19,7 +19,7 @@ class PlaceImageModel(models.Model):
     title           = models.CharField(max_length=555)
     alt             = models.CharField(null=True, blank=True, max_length=255)
     image           = models.ImageField(upload_to=image_directory_path, default = 'images/static/defualt.png')
-    uploaded_date   = models.DateTimeField(auto_now_add=True)
+    uploaded_at   = models.DateTimeField(auto_now_add=True)
     status          = models.CharField(max_length=15, choices=options, default=options[0])
 
     def __str__(self):

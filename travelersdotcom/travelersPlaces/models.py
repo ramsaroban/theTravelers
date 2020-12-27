@@ -97,9 +97,10 @@ class TravelersVisitingPlaces(models.Model):
     local_area  = models.ForeignKey(AreasModel, on_delete=models.PROTECT, related_name='local_area_place')
     name        = models.CharField(_('Title'), max_length=255)
     about       = models.TextField(_('Ábout'),  max_length=5555)
+    address     = models.TextField(_('Address'), max_length=250)
     image       = models.ImageField(_('Logo Image'),upload_to=places_images, blank=False, null=False)
     category    = models.ManyToManyField(PlaceCategory, related_name='place_category')
-    activites   = models.ManyToManyField(ActivitiesAtPlacesModel, related_name='place_activity')
+    activity   = models.ManyToManyField(ActivitiesAtPlacesModel, related_name='place_activity')
     location    = models.PointField(_('Visiting Place Location'), default='POINT(0,0)', blank=True, null=True)
 
     def __str__(self):
