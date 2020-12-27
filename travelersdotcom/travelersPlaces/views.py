@@ -84,3 +84,20 @@ class GetVisitingPlaceByActivity(ListAPIView):
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+class GetNearPlacesByRadius(ListAPIView):
+    queryset = TravelersVisitingPlaces.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class=TravelersVisitingPlacesSerializer
+    http_method_names = ['get']
+
+    def list(self, request, *args, **kwargs):
+        current_place=get_object_or_404(TravelersVisitingPlaces,id=self.kwargs['id'])
+        queryset = TravelersVisitingPlaces.objects.filter(location__distance_lt=(current_place.location,Distance(km=5)))
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
