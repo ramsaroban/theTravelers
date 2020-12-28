@@ -96,12 +96,11 @@ class GetNearPlacesByRadius(ListAPIView):
     http_method_names = ['get']
 
     def list(self, request, *args, **kwargs):
-        current_place=get_object_or_404(TravelersVisitingPlaces,id=self.kwargs['id'])
-        queryset = TravelersVisitingPlaces.objects.filter(location__distance_lt=(current_place.location,Distance(km=5)))
+        current_place_radius=request.data.get('radius',None)
+        queryset = TravelersVisitingPlaces.objects.filter(location__distance_lt=(current_place_radius,Distance(km=5)))
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
-
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)

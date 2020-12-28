@@ -140,3 +140,9 @@ class guideAgencyReviewsCommentUpdate(UpdateAPIView):
 			return Response(serializer.data)
 		else:
 			return Response({'error':'Not allowded to Update'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+#estimating time for visiting place
+#shortest place from user profile
+#redis server 
+#deploying
