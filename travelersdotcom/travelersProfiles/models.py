@@ -80,7 +80,7 @@ class GuideUserProfile(models.Model):
     guide_type              = models.CharField(_('Guide type'), max_length=1000, 
                                                 choices=GUIDE_TYPE_CHOICES,
                                                 default=GUIDE_TYPE_CHOICES[0][0])
-    have_vehicle            = models.CharField(_('Do you have vehicle'),max_length=30, choices=YES_NO_CHOICE,default=YES_NO_CHOICE[1][0])
+    have_vehicle            = models.CharField(_('Do you have vehicle?'),max_length=30, choices=YES_NO_CHOICE,default=YES_NO_CHOICE[1][0])
     vehicle_type            = models.CharField(_('Vehicle Type'), max_length=30,choices=VEHICLE_TYPE,default=VEHICLE_TYPE[0][0])
     gov_id_proof            = models.ImageField(_('Any Goverment ID'), upload_to=gov_id_image_directory_path,
                                                             blank=True, null=True)
