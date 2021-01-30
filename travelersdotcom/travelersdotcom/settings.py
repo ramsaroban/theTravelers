@@ -81,7 +81,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'travelersdotcom.wsgi.application'
-
+CACHES = { "default": { "BACKEND": "django_redis.cache.RedisCache", "LOCATION": "redis://127.0.0.1:6379/1", "OPTIONS": { "CLIENT_CLASS": "django_redis.client.DefaultClient", } } }
+# REDIS_HOST = 'localhost'
+# REDIS_PORT = 6379
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

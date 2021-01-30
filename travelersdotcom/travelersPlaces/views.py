@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .serializers import *
-
+import redis
 from .models import *
 from rest_framework.response import Response
 from rest_framework import viewsets
@@ -87,8 +87,9 @@ class GetVisitingPlaceByActivity(ListAPIView):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
-
-
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+@method_decorator(cache_page(60 * 1), name='dispatch')
 class GetNearPlacesByRadius(ListAPIView):
     queryset = TravelersVisitingPlaces.objects.all()
     permission_classes = [IsAuthenticatedOrReadOnly]
@@ -96,8 +97,8 @@ class GetNearPlacesByRadius(ListAPIView):
     http_method_names = ['get']
 
     def list(self, request, *args, **kwargs):
-        current_place_radius=request.data.get('radius',None)
-        queryset = TravelersVisitingPlaces.objects.filter(location__distance_lt=(current_place_radius,Distance(km=5)))
+        current_place_lat_long=request.data.get('current_place_lat_long',None)
+        queryset = TravelersVisitingPlaces.objects.filter(location__distance_lt=(current_place_lat_long,Distance(km=10)))
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
