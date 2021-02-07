@@ -218,12 +218,12 @@ EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
 EMAIL_HOST = 'in-v3.mailjet.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = '04a55d5195ba9bf6ce776dd8f9700a1d'
-EMAIL_HOST_PASSWORD = '0c1dfd29fe84c4ec147e5bfc970bba3e'
+EMAIL_HOST_USER = '60eca9509a525a12d3e45331151c599f'
+EMAIL_HOST_PASSWORD = '5a24f5fb3ae18e3b159ab30aca201c5a'
 
 ANYMAIL = {
-    "MAILJET_API_KEY": "04a55d5195ba9bf6ce776dd8f9700a1d",
-    "MAILJET_SECRET_KEY": "0c1dfd29fe84c4ec147e5bfc970bba3e",
+    "MAILJET_API_KEY": "60eca9509a525a12d3e45331151c599f",
+    "MAILJET_SECRET_KEY": "5a24f5fb3ae18e3b159ab30aca201c5a",
 }
 
-DEFAULT_FROM_EMAIL = 'pyratedcracker@gmail.com'
+DEFAULT_FROM_EMAIL = 'travelers.api@gmail.com'
