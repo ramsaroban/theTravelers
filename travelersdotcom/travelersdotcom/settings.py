@@ -43,10 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    'travelersPlaces',
-    'travelersMedia',
     'travelersUsers',
     'travelersProfiles',
+    'travelersPlaces',
+    'travelersMedia',
     'travelersReviewsComments',
     'travelersBanner',
     "anymail",
@@ -100,11 +100,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
         'NAME': config('DATABASE_NAME'),
         'USER': 'postgres',
         'PASSWORD':config('DATABASE_PASSWORD'),
         'HOST': config('DATABASE_HOST'),
         'PORT': config('DATABASE_PORT'),
+
     }
 }
    

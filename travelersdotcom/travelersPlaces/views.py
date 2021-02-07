@@ -87,9 +87,11 @@ class GetVisitingPlaceByActivity(ListAPIView):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
-from django.views.decorators.cache import cache_page
-from django.utils.decorators import method_decorator
-@method_decorator(cache_page(60 * 1), name='dispatch')
+
+
+# from django.views.decorators.cache import cache_page
+# from django.utils.decorators import method_decorator
+# @method_decorator(cache_page(60 * 1), name='dispatch')
 class GetNearPlacesByRadius(ListAPIView):
     queryset = TravelersVisitingPlaces.objects.all()
     permission_classes = [IsAuthenticatedOrReadOnly]

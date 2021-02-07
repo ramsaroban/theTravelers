@@ -1,7 +1,13 @@
   
 from rest_framework import serializers
 
-from .models import TravelersVisitingPlaceReviewsComment,GuideAgencyReview
+
+from .models import (
+	TravelersVisitingPlaceReviewsComment,
+	GuideAgencyReview
+)
+
+
 from django.contrib.auth import get_user_model
 Users = get_user_model()
 from rest_framework.fields import CurrentUserDefault
@@ -41,8 +47,6 @@ class GetVisitingPlaceReviewRatingByPlaceSerializer(serializers.ModelSerializer)
 	class Meta:
 		model=TravelersVisitingPlaceReviewsComment
 		fields = ['user','place','reviews','rating','average_rating_place',]
-
-
 
 class GuideAgencyReviewsCommentCreateSerializer(serializers.ModelSerializer):
 	average_rating=serializers.ReadOnlyField()
@@ -84,5 +88,6 @@ class GuideAgencyReviewsCommentUpdateSerializer(serializers.ModelSerializer):
 	
 	class Meta:
 		model = GuideAgencyReview
+
 		fields = ['user','reviewed_user','reviews','rating','average_rating',]
 

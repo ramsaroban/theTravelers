@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.db.models import Avg
 from django.contrib.auth import get_user_model
 from django.db.models import Avg
 User = get_user_model()
@@ -18,13 +19,9 @@ class TravelersVisitingPlaceReviewsComment(models.Model):
 
     def __str__(self):
         return '{}'.format(self.place.name)
-
     @property
     def average_rating_place(self):
     	return  TravelersVisitingPlaceReviewsComment.objects.filter(place=self.place).aggregate(Avg('rating')).get('rating__avg')
-
-
-
 
 # Create your models here.
 class GuideAgencyReview(models.Model):
@@ -42,4 +39,3 @@ class GuideAgencyReview(models.Model):
     def average_rating(self):
         return  GuideAgencyReview.objects.filter(reviewed_user=self.reviewed_user).aggregate(Avg('rating')).get('rating__avg')
 
-    

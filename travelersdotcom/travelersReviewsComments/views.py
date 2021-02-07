@@ -3,14 +3,15 @@ from .serializers import (
     TravelersVisitingPlaceReviewsCommentSerializers,
     TravelersVisitingPlaceReviewsCommentUpdateSerializers,
 	GetVisitingPlaceReviewRatingByPlaceSerializer,
+	GetVisitingPlaceReviewRatingByPlaceSerializer,
+
 	GuideAgencyReviewsCommentCreateSerializer,
 	GuideAgencyReviewsCommentUpdateSerializer
 )
 
 from .models import (
     TravelersVisitingPlaceReviewsComment,
-    GuideAgencyReview
-  
+    GuideAgencyReview  
 )
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
@@ -102,7 +103,8 @@ class GetVisitingPlaceReviewRatingByUser(ListAPIView):
 		return Response(serializer.data)
 	
 
-class guideAgencyReviewsCommentCreate(CreateAPIView):
+
+class GuideAgencyReviewsCommentCreate(CreateAPIView):
 	permission_classes = [IsAuthenticatedOrReadOnly]
 	serializer_class=GuideAgencyReviewsCommentCreateSerializer
 	def create(self, request, *args, **kwargs):
@@ -119,7 +121,8 @@ class guideAgencyReviewsCommentCreate(CreateAPIView):
 
 
 
-class guideAgencyReviewsCommentUpdate(UpdateAPIView):
+
+class GuideAgencyReviewsCommentUpdate(UpdateAPIView):
 	queryset = GuideAgencyReview.objects.all()
 	permission_classes = [IsAuthenticatedOrReadOnly]
 	serializer_class=GuideAgencyReviewsCommentUpdateSerializer
@@ -142,7 +145,4 @@ class guideAgencyReviewsCommentUpdate(UpdateAPIView):
 			return Response({'error':'Not allowded to Update'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-#estimating time for visiting place
-#shortest place from user profile
-#redis server 
-#deploying
+

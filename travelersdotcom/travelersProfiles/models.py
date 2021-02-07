@@ -80,7 +80,7 @@ class GuideUserProfile(models.Model):
     guide_type              = models.CharField(_('Guide type'), max_length=1000, 
                                                 choices=GUIDE_TYPE_CHOICES,
                                                 default=GUIDE_TYPE_CHOICES[0][0])
-    have_vehicle            = models.CharField(_('Do you have vehicle'),max_length=30, choices=YES_NO_CHOICE,default=YES_NO_CHOICE[1][0])
+    have_vehicle            = models.CharField(_('Do you have vehicle?'),max_length=30, choices=YES_NO_CHOICE,default=YES_NO_CHOICE[1][0])
     vehicle_type            = models.CharField(_('Vehicle Type'), max_length=30,choices=VEHICLE_TYPE,default=VEHICLE_TYPE[0][0])
     gov_id_proof            = models.ImageField(_('Any Goverment ID'), upload_to=gov_id_image_directory_path,
                                                             blank=True, null=True)
@@ -89,10 +89,11 @@ class GuideUserProfile(models.Model):
     agreement               = models.ImageField(_('Agreement'), upload_to=agreement_image_directory_path,
                                                             blank=True, null=True)
     interview_status        = models.CharField(_('Interview Complete?'), max_length=30, choices=YES_NO_CHOICE,default=YES_NO_CHOICE[0][0])
-    rating=models.IntegerField(_('Guide Standard Rating'),blank=True,null=True)
-    status=models.BooleanField(_('Availability'),default=True)
-    is_featured=models.BooleanField(_('Featured'),default=False)
-    is_in_top_ten=models.BooleanField(_('Top Ten'),default=False)
+    rating                  = models.IntegerField(_('Guide Standard Rating'),blank=True,null=True)
+    status                  = models.BooleanField(_('Availability'),default=True)
+    is_featured             = models.BooleanField(_('Featured'),default=False)
+    is_in_top_ten           = models.BooleanField(_('Top Ten'),default=False)
+
     def __str__(self):
         return self.mobile_number 
 
@@ -117,5 +118,4 @@ class TravelAgencyProfile(models.Model):
 
     def __str__(self):
         return self.user.email 
-
 
