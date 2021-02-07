@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'travelersUsers',
     'travelersProfiles',
     'travelersReviewsComments',
+    'travelersBanner',
+    "anymail",
 
 ]
 AUTH_USER_MODEL = "travelersUsers.Users" 
@@ -199,8 +201,27 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST='smtp.gmail.com'
+# EMIAL_PORT = 587
+# EMAIL_HOST_USER = 'travelers.api@gmail.com'
+# EMAIL_HOST_PASSWORD = '1325126040@Saroban'
+# EMAIL_USE_TLS = True
+# EMAIL_USE_TLS = False
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_BACKEND = "anymail.backends.mailjet.EmailBackend"
+EMAIL_HOST = 'in-v3.mailjet.com'
 EMAIL_USE_TLS = True
-EMAIL_HOST='smtp.gmail.com'
-EMIAL_PORT = 587
-EMAIL_HOST_USER = 'travelers.api@gmail.com'
-EMAIL_HOST_PASSWORD = '1325126040@Saroban'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '04a55d5195ba9bf6ce776dd8f9700a1d'
+EMAIL_HOST_PASSWORD = '0c1dfd29fe84c4ec147e5bfc970bba3e'
+
+ANYMAIL = {
+    "MAILJET_API_KEY": "04a55d5195ba9bf6ce776dd8f9700a1d",
+    "MAILJET_SECRET_KEY": "0c1dfd29fe84c4ec147e5bfc970bba3e",
+}
+
+DEFAULT_FROM_EMAIL = 'pyratedcracker@gmail.com'

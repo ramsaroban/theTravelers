@@ -51,6 +51,7 @@ class TouristUserRegisterView(generics.GenericAPIView):
         email_body = 'Dear '+user.first_name +' '+user.last_name+ ', \n' + 'We welcome you to the travelers family. We made the traveler\'s journey easy.\nPlease click the link below to verify your email.\n Link: '+absUrl +'\n\n Regards,\nTravelers.com Family'
         
         data = {'to_email':user.email,'email_subject':'Verify your email!', 'email_body':email_body}
+        print('start utils')
         Utils.send_mail(data)
 
         return Response(user_data, status=status.HTTP_201_CREATED)
@@ -189,3 +190,6 @@ class SetUpdatePasswordAPIView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
 
         return Response({'success':True,'message':'Password reset successful.'}, status=status.HTTP_200_OK)
+
+
+
