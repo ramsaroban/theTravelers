@@ -16,8 +16,6 @@ urlpatterns = [
  path('get-place-review/by-place/<int:id>/',GetVisitingPlaceReviewRatingByPlace.as_view(),name='get-place-review-rating-by-place'),
  path('get-place-review/by-user/<int:id>',GetVisitingPlaceReviewRatingByUser.as_view(),name='get-place-review-rating-by-user'),
 
-
-
  path('guide-agency-review/create/',GuideAgencyReviewsCommentCreate.as_view(),name='guide-agency-review-rating-create'),
  path('guide-agency-review/update/<int:pk>/',GuideAgencyReviewsCommentUpdate.as_view(),name='guide-agency-review-rating-update'),
 
