@@ -2,9 +2,9 @@ from rest_framework import serializers
 
 from .models import *
 
-from travelersReviewsComments.serializers import (
-    TravelersVisitingPlaceReviewsCommentSerializers
-)
+# from travelersReviewsComments.serializers import (
+#     TravelersVisitingPlaceReviewsCommentSerializers
+# )
 
 class CountryModelSerializer(serializers.ModelSerializer):
     class Meta:

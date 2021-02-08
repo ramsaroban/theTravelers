@@ -44,6 +44,7 @@ urlpatterns = [
     path('api/images/', include('travelersMedia.urls')),
     path('api/reviews/', include('travelersReviewsComments.urls')),
     path('api/visiting-places/', include('travelersPlaces.urls')),
+    path('api/banner/', include('travelersBanner.urls')),
     #path('media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
     #path('static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 ]
