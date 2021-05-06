@@ -98,11 +98,12 @@ class LoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(max_length=255)
     password = serializers.CharField(max_length=30, min_length=7, write_only=True)
     first_name = serializers.CharField(max_length=255, read_only=True)
-    tokens = serializers.CharField(max_length=555, read_only=True)
+    refreshToken = serializers.CharField(max_length=555, read_only=True)
+    accessToken = serializers.CharField(max_length=555, read_only=True)
 
     class Meta:
         model = Users
-        fields = ['email','first_name','password','tokens']
+        fields = ['email','first_name','password','refreshToken','accessToken']
 
     # def get_token(self,obj):
     #     user = Users.objects.get(email=obj['email'])
@@ -118,14 +119,17 @@ class LoginSerializer(serializers.ModelSerializer):
         if not user:
             raise AuthenticationFailed('Invalid credential, try with valid credentials.')
         if not user.is_active:
-            raise AuthenticationFailed('Account is not active, please contact at help@travelers.com')
+            raise AuthenticationFailed('Account is not active, please contact at help@thetraveler.com')
         if not user.is_verified:
             raise AuthenticationFailed('Email is not verified.')
-        
+
+        tokens = user.tokens()
+
         data = {
             'email':user.email,
             'first_name':user.first_name,
-            'tokens':user.tokens(),
+            'refreshToken':tokens.get('refresh'),
+            'accessToken':tokens.get('access'),
         }
         return  data
 
