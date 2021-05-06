@@ -19,6 +19,7 @@ class TravelersVisitingPlaceReviewsComment(models.Model):
 
     def __str__(self):
         return '{}'.format(self.place.name)
+    
     @property
     def average_rating_place(self):
     	return  TravelersVisitingPlaceReviewsComment.objects.filter(place=self.place).aggregate(Avg('rating')).get('rating__avg')
